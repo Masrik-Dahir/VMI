@@ -5,20 +5,20 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType("VMI_GUI.ui")
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.setupUi(self)
+    def __init__(self, parent = None):
+
+        QtWidgets.QMainWindow.__init__(self,parent=parent)
         menu_bar = self.menuBar()
         menu_bar.setNativeMenuBar(False)
-        self.viewer = GraphicsWindow(self)
 
+        self.graphicsView()
 
-class GraphicsWindow(QtWidgets.QGraphicsView):
-    def __init__(self, parent):
-        super(GraphicsWindow, self).__init__(parent)
-        self._scene = QtWidgets.QGraphicsScene(self)
-        self.graphicsView.setScene(self._scene)
-        self.setScene(self._scene)
+    def graphicsView(self):
+
+        self.setupUi(self)
+        scene = QtWidgets.QGraphicsScene()
+        self.graphicsView.setScene(scene)
+
         pen = QtGui.QPen(QtCore.Qt.green)
         side = 20
 
@@ -29,7 +29,7 @@ class GraphicsWindow(QtWidgets.QGraphicsView):
                 r = print([j])
 
     def wheelEvent(self, event):
-        if event.angleDelta().y() > 0:
+        if event.delta() > 0:
             factor = 1.25
             self._zoom += 1
         else:
@@ -39,6 +39,19 @@ class GraphicsWindow(QtWidgets.QGraphicsView):
             self.scale(factor, factor)
         else:
             self._zoom = 0
+
+
+
+
+class GraphicsWindow(QtWidgets.QGraphicsView):
+
+    def __init__(self):
+        pass
+
+
+
+
+
 
 
 if __name__ == '__main__':
