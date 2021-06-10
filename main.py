@@ -15,7 +15,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.show()
 
     def browser_file(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Image files(*.iso)')
+        fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.vmem, *.mem)')
         self.lineEdit.setText(fname[0])
 
 
