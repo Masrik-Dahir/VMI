@@ -1,5 +1,7 @@
 # This Python file uses the following encoding: utf-8
+import os
 import sys
+from threading import Thread
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QWidget, QFileDialog
@@ -15,9 +17,27 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.show()
 
     def browser_file(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
-        self.lineEdit.setText(fname[0])
-
+        self.fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
+        self.lineEdit.setText(self.fname[0])
+        print(self.fname[0])
+        location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
+        p = os.popen(location).read()
+        print(p)
+        splitted = p.split('\n', 1)
+        profiles = splitted[0].strip()
+        print(profiles)
+        profiles = profiles.split(',')
+        print(profiles)
+        index = profiles[0].find("Win")
+        print(index)
+        first =profiles[0][index:]
+        print(first)
+        #for string in profiles:
+            #if string.find("Win"):
+                #print(string)
+        pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
+        p = os.popen(pslist).read()
+        print(p)
 
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
