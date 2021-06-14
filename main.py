@@ -5,7 +5,6 @@ from threading import Thread
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QWidget, QFileDialog
-
 from form import Ui_MainWindow
 
 
@@ -14,6 +13,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         uic.loadUi("form.ui", self)
         self.pushButton.clicked.connect(self.browser_file)
+        self.pushButton_3.clicked.connect(self.create_process)
         self.show()
 
     def browser_file(self):
@@ -46,6 +46,11 @@ class MainWindow(QWidget, Ui_MainWindow):
         for string in processes:
             print(string)
 
+
+    def create_process(self):
+        print("Button is clicked!")
+        a = self.comboBox.itemText()
+        print(a)
 
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
