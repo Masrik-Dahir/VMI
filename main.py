@@ -28,16 +28,24 @@ class MainWindow(QWidget, Ui_MainWindow):
         print(profiles)
         profiles = profiles.split(',')
         print(profiles)
-        index = profiles[0].find("Win")
-        print(index)
-        first =profiles[0][index:]
-        print(first)
-        #for string in profiles:
-            #if string.find("Win"):
-                #print(string)
+        #index = profiles[0].find("Win")
+        #print(index)
+        i=0
+        while i < len(profiles):
+            index = profiles[0].find("Win")
+            suggested = profiles[0][index:]
+            profiles[0] = suggested.strip()
+            i+=1
+        print(profiles)
+        first = profiles[0]
         pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
         p = os.popen(pslist).read()
         print(p)
+        splitted = p.split('\n', 2)
+        processes = splitted[2].split('\n')
+        for string in processes:
+            print(string)
+
 
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
