@@ -27,6 +27,10 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+
+
+
+
         self.gridLayout_9 = QtWidgets.QGridLayout(self.frame)
         self.gridLayout_9.setObjectName("gridLayout_9")
         self.frame_2 = QtWidgets.QFrame(self.frame)
@@ -104,10 +108,13 @@ class Ui_MainWindow(object):
 "")
         self.pushButton_5.setObjectName("pushButton_5")
         self.gridLayout_7.addWidget(self.pushButton_5, 0, 0, 1, 1)
+
         self.label_4 = QtWidgets.QLabel(self.frame_2)
         self.label_4.setStyleSheet("color: rgb(0, 0, 0);")
         self.label_4.setObjectName("label_4")
         self.gridLayout_7.addWidget(self.label_4, 0, 1, 1, 1)
+
+
         self.gridLayout_4.addLayout(self.gridLayout_7, 0, 0, 1, 1)
         self.gridLayout_9.addWidget(self.frame_2, 2, 1, 1, 1)
         self.gridLayout_6 = QtWidgets.QGridLayout()
@@ -153,10 +160,12 @@ class Ui_MainWindow(object):
         self.label_2.setStyleSheet("color: rgb(0, 0, 0);")
         self.label_2.setObjectName("label_2")
         self.gridLayout_3.addWidget(self.label_2, 1, 0, 1, 1)
+
         self.label_3 = QtWidgets.QLabel(self.frame_3)
         self.label_3.setStyleSheet("color: rgb(0, 0, 0);")
         self.label_3.setObjectName("label_3")
         self.gridLayout_3.addWidget(self.label_3, 2, 0, 1, 1)
+
         self.comboBox = QtWidgets.QComboBox(self.frame_3)
         self.comboBox.setEnabled(True)
         self.comboBox.setObjectName("comboBox")
@@ -191,7 +200,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Physical Address:"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Observe"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Modify"))
-
 
 
 if __name__ == "__main__":
