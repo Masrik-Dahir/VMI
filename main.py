@@ -22,7 +22,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         uic.loadUi("form.ui", self)
         self.pushButton.clicked.connect(self.browser_file)
         self.pushButton_3.clicked.connect(self.dropdown_selection)
-        # self.graphicsView
+        self.pid_pushButton.clicked.connect(self.show_datastructure)
+        self.pushButton_6.clicked.connect(self.profile_work)
         self.show()
 
     def browser_file(self):
@@ -68,6 +69,11 @@ class MainWindow(QWidget, Ui_MainWindow):
             location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
             p = os.popen(location).read()
             # print(p)
+            l = [i for i in p.split('\n')]
+            l = [i for i in l[0].split(':')]
+            l = [i.replace(" ", "") for i in l[1].split(',')]
+            [self.comboBox_2.addItem(i) for i in l]
+
             text+=p + '\n'
             splitted = p.split('\n', 1)
             profiles = splitted[0].strip()
@@ -99,15 +105,28 @@ class MainWindow(QWidget, Ui_MainWindow):
             for string in processes:
                 # print(string)
                 important += str(string) + '\n'
-
-        # scene.addText(text)
-        scene.addText(important)
+        text += important
+        scene.addText(text)
+        # scene.addText(important)
         self.graphicsView.setScene(scene)
 
         print("The processes are printed on the GraphicView window!")
 
         if (str(a) == 'Modify'):
             print(a)
+
+    def show_datastructure(self):
+        print("PID Select Button clicked!")
+        PID = self.pid_lineEdit.text()
+
+    def profile_work(self):
+        print("Profile Select Button clicked!")
+        combo_2 = self.comboBox_2.currentText()
+
+        location = 'python2.7 volatility/vol.py --profile='+combo_2+' -f ' + self.fname[0] + ' volshell'
+        p = os.popen(location).read()
+        command = "sc()"
+        p = os.popen(command).read()
 
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
