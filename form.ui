@@ -35,6 +35,122 @@
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QGridLayout" name="gridLayout_9">
+        <item row="2" column="0">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <widget class="QFrame" name="frame_3">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(0, 0, 0);</string>
+               </property>
+               <property name="text">
+                <string>Image File:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButton">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(0, 0, 0);</string>
+               </property>
+               <property name="text">
+                <string>Upload</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(0, 0, 0);</string>
+               </property>
+               <property name="text">
+                <string>Actions/Dropdown:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBox">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Observe</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Modify</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="text">
+                <string>Select</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QGraphicsView" name="graphicsView">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="2" column="1">
          <widget class="QFrame" name="frame_2">
           <property name="styleSheet">
@@ -109,6 +225,15 @@ background-color: rgb(255, 255, 255);</string>
                     </color>
                    </brush>
                   </colorrole>
+                  <colorrole role="PlaceholderText">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="128">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
                  </active>
                  <inactive>
                   <colorrole role="WindowText">
@@ -162,6 +287,15 @@ background-color: rgb(255, 255, 255);</string>
                      <red>255</red>
                      <green>255</green>
                      <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                  <colorrole role="PlaceholderText">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="128">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
                     </color>
                    </brush>
                   </colorrole>
@@ -221,6 +355,15 @@ background-color: rgb(255, 255, 255);</string>
                     </color>
                    </brush>
                   </colorrole>
+                  <colorrole role="PlaceholderText">
+                   <brush brushstyle="NoBrush">
+                    <color alpha="128">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
                  </disabled>
                 </palette>
                </property>
@@ -258,139 +401,100 @@ background-color: rgb(255, 255, 255);</string>
           </layout>
          </widget>
         </item>
-        <item row="1" column="0" colspan="3">
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QGraphicsView" name="graphicsView">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
-         <widget class="QFrame" name="frame_3">
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 255);</string>
-          </property>
+        <item row="0" column="2">
+         <widget class="QFrame" name="frame_4">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_5">
+          <layout class="QGridLayout" name="gridLayout_10">
            <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="lineEdit"/>
-             </item>
+            <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="2">
-              <widget class="QPushButton" name="pushButton">
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);</string>
-               </property>
+              <widget class="QPushButton" name="pid_pushButton">
                <property name="text">
-                <string>Upload</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_3"/>
-             </item>
-             <item row="2" column="2">
-              <widget class="QPushButton" name="pushButton_2">
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);</string>
-               </property>
-               <property name="text">
-                <string>Submit</string>
+                <string>Select</string>
                </property>
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QLabel" name="label">
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);</string>
-               </property>
+              <widget class="QLabel" name="pid_label">
                <property name="text">
-                <string>Image File:</string>
+                <string>PID:</string>
                </property>
               </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="pid_lineEdit"/>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_2">
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);</string>
-               </property>
-               <property name="text">
-                <string>Actions/Dropdown:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="styleSheet">
-                <string notr="true">color: rgb(0, 0, 0);</string>
-               </property>
+              <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Physical Address:</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="comboBox">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Observe</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Modify</string>
-                </property>
-               </item>
-              </widget>
-             </item>
              <item row="1" column="2">
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="pushButton_6">
                <property name="text">
                 <string>Select</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_3"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QFrame" name="frame_5">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit_2"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QPushButton" name="pushButton_7">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_4"/>
              </item>
             </layout>
            </item>
