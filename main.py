@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import os
 import re
-import sys
+import sys, threading
 from random import randint
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtGui import QColor
@@ -22,7 +22,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.pushButton.clicked.connect(self.browser_file)
         self.pushButton_3.clicked.connect(self.dropdown_selection)
         self.pid_pushButton.clicked.connect(self.show_datastructure)
-        self.pushButton_6.clicked.connect(self.profile_work)
+        self.pushButton_6.clicked.connect(self.start_thread)
         self.scene = QGraphicsScene(self)
         self.processes_scene = QGraphicsScene(self)
         self.show()
@@ -117,14 +117,19 @@ class MainWindow(QWidget, Ui_MainWindow):
         print("PID Select Button clicked!")
         PID = self.pid_lineEdit.text()
 
+    def start_thread(self):
+        thread1 = threading.Thread(target=self.profile_work)
+        thread1.start()
+
     def profile_work(self):
+        self.pushButton_6.setDisabled(True)
         print("Profile Select Button clicked!")
         combo_2 = self.comboBox_2.currentText()
-
         location = 'python2.7 volatility/vol.py --profile='+combo_2+' -f ' + self.fname[0] + ' volshell'
         p = os.popen(location).read()
         command = "sc()"
         p = os.popen(command).read()
+
 
 
 app = QtWidgets.QApplication(sys.argv)
