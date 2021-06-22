@@ -1,10 +1,11 @@
 # This Python file uses the following encoding: utf-8
 import os
 import sys
+from random import randint
 from threading import Thread
 
 from PyQt5 import uic, QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QImage, QMouseEvent
+from PyQt5.QtGui import QImage, QMouseEvent, QColor
 from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QGraphicsView, QGraphicsSceneMouseEvent, \
     QGraphicsProxyWidget, QGraphicsItem, QGraphicsWidget
 
@@ -24,6 +25,10 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.pushButton_3.clicked.connect(self.dropdown_selection)
         self.pid_pushButton.clicked.connect(self.show_datastructure)
         self.pushButton_6.clicked.connect(self.profile_work)
+        global scene
+        scene = QGraphicsScene(self)
+        global processes_scene
+        processes_scene = QGraphicsScene(self)
         self.show()
 
     def browser_file(self):
@@ -31,37 +36,10 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
         self.lineEdit.setText(self.fname[0])
 
-        # print(self.fname[0])
-        # location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
-        # p = os.popen(location).read()
-        # print(p)
-        # splitted = p.split('\n', 1)
-        # profiles = splitted[0].strip()
-        # print(profiles)
-        # profiles = profiles.split(',')
-        # print(profiles)
-        # #index = profiles[0].find("Win")
-        # #print(index)
-        # i=0
-        # while i < len(profiles):
-        #     index = profiles[0].find("Win")
-        #     suggested = profiles[0][index:]
-        #     profiles[0] = suggested.strip()
-        #     i+=1
-        # print(profiles)
-        # first = profiles[0]
-        # pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
-        # p = os.popen(pslist).read()
-        # print(p)
-        # splitted = p.split('\n', 2)
-        # processes = splitted[2].split('\n')
-        # for string in processes:
-        #     print(string)
-
     def dropdown_selection(self):
 
         print("Select Button clicked!")
-        scene = QGraphicsScene()
+
         text = ""
         a = self.comboBox.currentText()
 
@@ -75,14 +53,14 @@ class MainWindow(QWidget, Ui_MainWindow):
             l = [i.replace(" ", "") for i in l[1].split(',')]
             [self.comboBox_2.addItem(i) for i in l]
 
-            text+=p + '\n'
+            text += p + '\n'
             splitted = p.split('\n', 1)
             profiles = splitted[0].strip()
             # print(profiles)
-            text+=profiles + '\n'
+            text += profiles + '\n'
             profiles = profiles.split(',')
             # print(profiles)
-            text+=str(profiles) + '\n'
+            text += str(profiles) + '\n'
             # index = profiles[0].find("Win")
             # print(index)
             i = 0
@@ -93,28 +71,50 @@ class MainWindow(QWidget, Ui_MainWindow):
                 profiles[0] = suggested.strip()
                 i += 1
             # print(profiles)
-            text+=str(profiles) + '\n'
+            text += str(profiles) + '\n'
             first = profiles[0]
             pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
+
             p = os.popen(pslist).read()
             # print(p)
-            text+=str(p) + '\n'
-            important+=str(p)+'\n'
+            text += str(p) + '\n'
+            important += str(p)+'\n'
             splitted = p.split('\n', 2)
             processes = splitted[2].split('\n')
-            allProcesses = []
+
+
+
+            print(processes)
+
+            x = 0
+
+            y = 0
+
             for string in processes:
-                important += str(string) + '\n'  # This will be removed soon
-                allProcesses.append(str(string))  # Add process specifications to individual arrays
+                important += str(string) + '\n'
 
+                rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x, 0, 200, 500))
+                a1 = randint(0, 255)
+                a2 = randint(0, 255)
+                a3 = randint(0, 255)
+                a4 = randint(0, 255)
+                rect_item.setBrush(QColor(a1, a2, a3, a4))
+                x += 200
 
+                processes_scene.addItem(rect_item)
+                y = y + 1
 
-        # text += important
-        # scene.addText(text)
-        scene.addText(allProcesses)
-        self.graphicsView.setScene(scene)
+            print(y)
+            text += important
+            scene.addText(text)
+            self.graphicsView.setScene(scene)
 
-        print("The processes are printed on the GraphicView window!")
+            print("The processes are printed on the GraphicView window!")
+
+        if str(a) == 'Processes':
+            print("Processes dropdown chosen")
+            self.graphicsView.setScene(processes_scene)
+            print("Done")
 
         if str(a) == 'Modify':
             print(a)
