@@ -3,13 +3,9 @@ import os
 import re
 import sys
 from random import randint
-from threading import Thread
-
-from PyQt5 import uic, QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QImage, QMouseEvent, QColor
-from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QGraphicsView, QGraphicsSceneMouseEvent, \
-    QGraphicsProxyWidget, QGraphicsItem, QGraphicsWidget
-
+from PyQt5 import uic, QtWidgets, QtCore
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene
 from form import Ui_MainWindow
 from process import process
 
@@ -78,29 +74,26 @@ class MainWindow(QWidget, Ui_MainWindow):
 
         x = 0
         process_list = []
+
         for string in self.processes:
             self.important += str(string) + '\n'
             asd = re.sub(' +', ' ', string).split(' ')
+
             if asd != ['']:
                 process_list.append(asd)
-            self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x, 0, 200, 500))
-            a1 = randint(0, 255)
-            a2 = randint(0, 255)
-            a3 = randint(0, 255)
-            a4 = randint(0, 255)
-            self.rect_item.setBrush(QColor(a1, a2, a3, a4))
-            x += 200
-
-            self.processes_scene.addItem(self.rect_item)
 
         self.obj = []
+        x = 0
         for i in process_list:
-            p = process(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10])
+
+            p = process(x, i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10])
+            x = x + 200
             self.obj.append(p)
+            self.processes_scene.addItem(p.get_rect_item())
+            print(p)
+            print("\n")
 
-        # print([i.get_pid() for i in self.obj])
-
-
+        # print([i.dic for i in self.obj]) # test
 
     def dropdown_selection(self):
 
@@ -124,7 +117,6 @@ class MainWindow(QWidget, Ui_MainWindow):
         print("PID Select Button clicked!")
         PID = self.pid_lineEdit.text()
 
-
     def profile_work(self):
         print("Profile Select Button clicked!")
         combo_2 = self.comboBox_2.currentText()
@@ -133,6 +125,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         p = os.popen(location).read()
         command = "sc()"
         p = os.popen(command).read()
+
 
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()

@@ -1,8 +1,14 @@
+from random import randint
 from typing import Type
+
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtGui import QColor
+
 
 
 class process:
-    def __init__(self,offset,name,pid,ppid,thds,hnds,sess,wo, w64,start,exit):
+    def __init__(self, x_location, offset, name, pid, ppid, thds, hnds, sess, wo, w64, start, exit):
+        self.x_location = x_location
         self.offset = offset
         self.name = name
         self.pid = pid
@@ -14,6 +20,7 @@ class process:
         self.w64 = w64
         self.start = start
         self.exit = exit
+
         self.dic = {}
         self.dic['offset'] = self.offset
         self.dic['name'] = self.name
@@ -27,8 +34,19 @@ class process:
         self.dic['start'] = self.start
         self.dic['exit'] = self.exit
 
+        self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, 0, 200, 500))
+        a1 = randint(0, 255)
+        a2 = randint(0, 255)
+        a3 = randint(0, 255)
+        a4 = randint(0, 255)
+        self.rect_item.setBrush(QColor(a1, a2, a3, a4))
+
+
     def get_offset(self):
         return self.offset
+
+    def get_rect_item(self):
+        return self.rect_item
 
     def get_name(self):
         return self.name
