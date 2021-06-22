@@ -60,7 +60,6 @@ class MainWindow(QWidget, Ui_MainWindow):
 
     def dropdown_selection(self):
 
-        global allProcesses
         print("Select Button clicked!")
         scene = QGraphicsScene()
         text = ""
@@ -103,7 +102,7 @@ class MainWindow(QWidget, Ui_MainWindow):
             important+=str(p)+'\n'
             splitted = p.split('\n', 2)
             processes = splitted[2].split('\n')
-
+            allProcesses = []
             for string in processes:
                 important += str(string) + '\n'  # This will be removed soon
                 allProcesses.append(str(string))  # Add process specifications to individual arrays
