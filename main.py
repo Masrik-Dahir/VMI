@@ -58,13 +58,15 @@ class MainWindow(QWidget, Ui_MainWindow):
         # for string in processes:
         #     print(string)
 
-
     def dropdown_selection(self):
+
+        global allProcesses
         print("Select Button clicked!")
         scene = QGraphicsScene()
         text = ""
         a = self.comboBox.currentText()
-        if (str(a) == 'Observe'):
+
+        if str(a) == 'Observe':
             print("Observe dropdown selected!")
             location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
             p = os.popen(location).read()
@@ -103,16 +105,19 @@ class MainWindow(QWidget, Ui_MainWindow):
             processes = splitted[2].split('\n')
 
             for string in processes:
-                # print(string)
-                important += str(string) + '\n'
-        text += important
-        scene.addText(text)
-        # scene.addText(important)
+                important += str(string) + '\n'  # This will be removed soon
+                allProcesses.append(str(string))  # Add process specifications to individual arrays
+
+
+
+        # text += important
+        # scene.addText(text)
+        scene.addText(allProcesses)
         self.graphicsView.setScene(scene)
 
         print("The processes are printed on the GraphicView window!")
 
-        if (str(a) == 'Modify'):
+        if str(a) == 'Modify':
             print(a)
 
     def show_datastructure(self):
@@ -128,6 +133,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         command = "sc()"
         p = os.popen(command).read()
 
+
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
 app.exec_()
+
