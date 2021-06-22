@@ -1,5 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import os
+import re
 import sys
 from random import randint
 from threading import Thread
@@ -10,6 +11,7 @@ from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QGraphicsView,
     QGraphicsProxyWidget, QGraphicsItem, QGraphicsWidget
 
 from form import Ui_MainWindow
+from process import process
 
 
 def reverse(a):
@@ -75,19 +77,30 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.processes = splitted[2].split('\n')
 
         x = 0
-
+        process_list = []
         for string in self.processes:
             self.important += str(string) + '\n'
-
-            rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x, 0, 200, 500))
+            asd = re.sub(' +', ' ', string).split(' ')
+            if asd != ['']:
+                process_list.append(asd)
+            self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x, 0, 200, 500))
             a1 = randint(0, 255)
             a2 = randint(0, 255)
             a3 = randint(0, 255)
             a4 = randint(0, 255)
-            rect_item.setBrush(QColor(a1, a2, a3, a4))
+            self.rect_item.setBrush(QColor(a1, a2, a3, a4))
             x += 200
 
-            self.processes_scene.addItem(rect_item)
+            self.processes_scene.addItem(self.rect_item)
+
+        self.obj = []
+        for i in process_list:
+            p = process(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9],i[10])
+            self.obj.append(p)
+
+        # print([i.get_pid() for i in self.obj])
+
+
 
     def dropdown_selection(self):
 
