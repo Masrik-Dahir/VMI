@@ -104,6 +104,16 @@
                </item>
                <item>
                 <property name="text">
+                 <string>Processes</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Raw RAM</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string>Modify</string>
                 </property>
                </item>
