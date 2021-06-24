@@ -4,8 +4,9 @@ import re
 import sys, threading
 from random import randint
 from PyQt5 import uic, QtWidgets, QtCore
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene
+from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QGraphicsTextItem, QDialog, QLabel
 from form import Ui_MainWindow
 from process import process
 
@@ -72,6 +73,9 @@ class MainWindow(QWidget, Ui_MainWindow):
         splitted = p.split('\n', 2)
         self.processes = splitted[2].split('\n')
 
+
+
+
         x = 0
         process_list = []
 
@@ -89,7 +93,21 @@ class MainWindow(QWidget, Ui_MainWindow):
             p = process(x, i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10])
             x = x + 200
             self.obj.append(p)
+
             self.processes_scene.addItem(p.get_rect_item())
+            self.processes_scene.addItem(p.get_offset())
+            self.processes_scene.addItem(p.get_name())
+            self.processes_scene.addItem(p.get_pid())
+            self.processes_scene.addItem(p.get_ppid())
+            self.processes_scene.addItem(p.get_thds())
+            self.processes_scene.addItem(p.get_hnds())
+            self.processes_scene.addItem(p.get_sess())
+            self.processes_scene.addItem(p.get_wo())
+            self.processes_scene.addItem(p.get_w64())
+            self.processes_scene.addItem(p.get_start())
+            self.processes_scene.addItem(p.get_exit())
+
+
             print(p)
             print("\n")
 
@@ -129,7 +147,6 @@ class MainWindow(QWidget, Ui_MainWindow):
         p = os.popen(location).read()
         command = "sc()"
         p = os.popen(command).read()
-
 
 
 app = QtWidgets.QApplication(sys.argv)

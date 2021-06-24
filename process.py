@@ -1,9 +1,7 @@
 from random import randint
-from typing import Type
-
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtGui import QColor
-
+from PyQt5.QtWidgets import QGraphicsTextItem
 
 
 class process:
@@ -34,51 +32,97 @@ class process:
         self.dic['start'] = self.start
         self.dic['exit'] = self.exit
 
+        #self.pid_text = QtWidgets.QGraphicsTextItem("test")
         self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, 0, 200, 500))
+
         a1 = randint(0, 255)
         a2 = randint(0, 255)
         a3 = randint(0, 255)
         a4 = randint(0, 255)
         self.rect_item.setBrush(QColor(a1, a2, a3, a4))
 
+        self.gui_offset = QGraphicsTextItem()
+        self.gui_name = QGraphicsTextItem()
+        self.gui_pid = QGraphicsTextItem()
+        self.gui_ppid = QGraphicsTextItem()
+        self.gui_thds = QGraphicsTextItem()
+        self.gui_hnds = QGraphicsTextItem()
+        self.gui_sess = QGraphicsTextItem()
+        self.gui_wo = QGraphicsTextItem()
+        self.gui_w64 = QGraphicsTextItem()
+        self.gui_start = QGraphicsTextItem()
+        self.gui_exit = QGraphicsTextItem()
+
+        self.gui_offset.setPos(self.x_location, 0)
+        self.gui_offset.setPlainText("Offset: " + self.offset)
+
+        self.gui_name.setPos(self.x_location, 35)
+        self.gui_name.setPlainText("Name: " + self.name)
+
+        self.gui_pid.setPos(self.x_location, 70)
+        self.gui_pid.setPlainText("PID: " + self.pid)
+
+        self.gui_ppid.setPos(self.x_location, 105)
+        self.gui_ppid.setPlainText("PPID: " + self.ppid)
+
+        self.gui_thds.setPos(self.x_location, 140)
+        self.gui_thds.setPlainText("Threads: " + self.thds)
+
+        self.gui_hnds.setPos(self.x_location, 175)
+        self.gui_hnds.setPlainText("Handles: " + self.hnds)
+
+        self.gui_sess.setPos(self.x_location, 210)
+        self.gui_sess.setPlainText("Session: " + self.sess)
+
+        self.gui_wo.setPos(self.x_location, 245)
+        self.gui_wo.setPlainText("wo: " + self.wo)
+
+        self.gui_w64.setPos(self.x_location, 280)
+        self.gui_w64.setPlainText("w64: " + self.w64)
+
+        self.gui_start.setPos(self.x_location, 315)
+        self.gui_start.setPlainText("Start: " + self.w64)
+
+        self.gui_exit.setPos(self.x_location, 350)
+        self.gui_exit.setPlainText("Exit: " + self.exit)
 
     def get_offset(self):
-        return self.offset
-
-    def get_rect_item(self):
-        return self.rect_item
+        return self.gui_offset
 
     def get_name(self):
-        return self.name
+        return self.gui_name
 
     def get_pid(self):
-        return self.pid
+        return self.gui_pid
 
     def get_ppid(self):
-        return self.ppid
+        return self.gui_ppid
 
     def get_thds(self):
-        return self.thds
+        return self.gui_thds
 
     def get_sess(self):
-        return self.sess
+        return self.gui_sess
 
     def get_wo(self):
-        return self.wo
+        return self.gui_wo
 
     def get_w64(self):
-        return self.w64
+        return self.gui_w64
 
     def get_start(self):
-        return self.start
+        return self.gui_start
 
     def get_exit(self):
-        return self.exit
+        return self.gui_exit
 
     def get_hnds(self):
-        return self.hnds
+        return self.gui_hnds
 
     def toString(self):
         return self.dic
+
+    def get_rect_item(self):
+        return self.rect_item
 
 
