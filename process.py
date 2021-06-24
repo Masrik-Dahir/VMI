@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QGraphicsTextItem
 
 
 class process:
-    def __init__(self, x_location, offset, name, pid, ppid, thds, hnds, sess, wo, w64, start, exit):
+    def __init__(self, x_location, offset, name, pid, ppid, thds, hnds, sess, wow64):
         self.x_location = x_location
         self.offset = offset
         self.name = name
@@ -14,10 +14,9 @@ class process:
         self.thds = thds
         self.hnds = hnds
         self.sess = sess
-        self.wo = wo
-        self.w64 = w64
-        self.start = start
-        self.exit = exit
+        self.wow64 = wow64
+        # self.start = start
+        # self.exit = exit
 
         self.dic = {}
         self.dic['offset'] = self.offset
@@ -27,10 +26,9 @@ class process:
         self.dic['thds'] = self.thds
         self.dic['hnds'] = self.hnds
         self.dic['sess'] = self.sess
-        self.dic['wo'] = self.wo
-        self.dic['w64'] = self.w64
-        self.dic['start'] = self.start
-        self.dic['exit'] = self.exit
+        self.dic['wow64'] = self.wow64
+        # self.dic['start'] = self.start
+        # self.dic['exit'] = self.exit
 
         #self.pid_text = QtWidgets.QGraphicsTextItem("test")
         self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, 0, 200, 500))
@@ -48,10 +46,9 @@ class process:
         self.gui_thds = QGraphicsTextItem()
         self.gui_hnds = QGraphicsTextItem()
         self.gui_sess = QGraphicsTextItem()
-        self.gui_wo = QGraphicsTextItem()
-        self.gui_w64 = QGraphicsTextItem()
-        self.gui_start = QGraphicsTextItem()
-        self.gui_exit = QGraphicsTextItem()
+        self.gui_wow64 = QGraphicsTextItem()
+        # self.gui_start = QGraphicsTextItem()
+        # self.gui_exit = QGraphicsTextItem()
 
         self.gui_offset.setPos(self.x_location, 0)
         self.gui_offset.setPlainText("Offset: " + self.offset)
@@ -74,17 +71,14 @@ class process:
         self.gui_sess.setPos(self.x_location, 210)
         self.gui_sess.setPlainText("Session: " + self.sess)
 
-        self.gui_wo.setPos(self.x_location, 245)
-        self.gui_wo.setPlainText("wo: " + self.wo)
+        self.gui_wow64.setPos(self.x_location, 245)
+        self.gui_wow64.setPlainText("wow64: " + self.wow64)
 
-        self.gui_w64.setPos(self.x_location, 280)
-        self.gui_w64.setPlainText("w64: " + self.w64)
-
-        self.gui_start.setPos(self.x_location, 315)
-        self.gui_start.setPlainText("Start: " + self.w64)
-
-        self.gui_exit.setPos(self.x_location, 350)
-        self.gui_exit.setPlainText("Exit: " + self.exit)
+        # self.gui_start.setPos(self.x_location, 315)
+        # self.gui_start.setPlainText("Start: " + self.start)
+        #
+        # self.gui_exit.setPos(self.x_location, 350)
+        # self.gui_exit.setPlainText("Exit: " + self.exit)
 
     def get_offset(self):
         return self.gui_offset
@@ -104,17 +98,15 @@ class process:
     def get_sess(self):
         return self.gui_sess
 
-    def get_wo(self):
-        return self.gui_wo
+    def get_wow64(self):
+        return self.gui_wow64
 
-    def get_w64(self):
-        return self.gui_w64
 
-    def get_start(self):
-        return self.gui_start
-
-    def get_exit(self):
-        return self.gui_exit
+    # def get_start(self):
+    #     return self.gui_start
+    #
+    # def get_exit(self):
+    #     return self.gui_exit
 
     def get_hnds(self):
         return self.gui_hnds
