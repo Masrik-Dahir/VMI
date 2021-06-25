@@ -106,6 +106,7 @@ class MainWindow(QWidget, Ui_MainWindow):
             processes_scene.addItem(p.get_wow64())
             # self.processes_scene.addItem(p.get_start())
             # self.processes_scene.addItem(p.get_exit())
+            # Just a test
             self.processes_scene = processes_scene
 
         # print([i.dic for i in self.obj]) # test
