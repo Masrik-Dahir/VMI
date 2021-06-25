@@ -1,11 +1,13 @@
 from random import randint
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QGraphicsTextItem
+from PyQt5.QtWidgets import QGraphicsTextItem, QGraphicsRectItem
 
 
-class process:
+class process(QGraphicsRectItem):
     def __init__(self, x_location, offset, name, pid, ppid, thds, hnds, sess, wow64):
+        super().__init__()
         self.x_location = x_location
         self.offset = offset
         self.name = name
@@ -17,6 +19,8 @@ class process:
         self.wow64 = wow64
         # self.start = start
         # self.exit = exit
+
+
 
         self.dic = {}
         self.dic['offset'] = self.offset
@@ -32,6 +36,9 @@ class process:
 
         #self.pid_text = QtWidgets.QGraphicsTextItem("test")
         self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, 0, 200, 500))
+
+
+
 
         a1 = randint(0, 255)
         a2 = randint(0, 255)
@@ -79,6 +86,9 @@ class process:
         #
         # self.gui_exit.setPos(self.x_location, 350)
         # self.gui_exit.setPlainText("Exit: " + self.exit)
+
+    def get_pid_dropdown(self):
+        return self.pid
 
     def get_offset(self):
         return self.gui_offset
