@@ -436,9 +436,6 @@ background-color: rgb(255, 255, 255);</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="pid_lineEdit"/>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
@@ -455,6 +452,9 @@ background-color: rgb(255, 255, 255);</string>
              </item>
              <item row="1" column="1">
               <widget class="QComboBox" name="comboBox_2"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="pid_comboBox"/>
              </item>
             </layout>
            </item>
