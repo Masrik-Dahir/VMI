@@ -87,9 +87,8 @@ class process(QGraphicsRectItem):
         # self.gui_exit.setPos(self.x_location, 350)
         # self.gui_exit.setPlainText("Exit: " + self.exit)
 
-    def handleDoubleClick(self):
-        print("Helo")
-
+    def get_pid_dropdown(self):
+        return self.pid
 
     def get_offset(self):
         return self.gui_offset
