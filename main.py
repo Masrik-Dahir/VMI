@@ -2,11 +2,8 @@
 import os
 import re
 import sys, threading
-from random import randint
-from PyQt5 import uic, QtWidgets, QtCore
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QGraphicsTextItem, QDialog, QLabel
+from PyQt5 import uic, QtWidgets
+from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene
 from form import Ui_MainWindow
 from process import process
 
