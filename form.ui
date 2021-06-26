@@ -104,7 +104,7 @@
                 <string notr="true">color: rgb(0, 0, 0);</string>
                </property>
                <property name="text">
-                <string>Actions:</string>
+                <string>Action:</string>
                </property>
               </widget>
              </item>
@@ -149,7 +149,7 @@ selection-background-color: rgb(191, 191, 191);</string>
                 <string notr="true">background-color: rgb(171, 171, 171);\n</string>
                </property>
                <property name="text">
-                <string>Show</string>
+                <string>Select</string>
                </property>
               </widget>
              </item>
@@ -502,7 +502,7 @@ background-color: rgb(255, 255, 255);</string>
                 <string notr="true">color: rgb(0, 0, 0);</string>
                </property>
                <property name="text">
-                <string>.</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -579,21 +579,21 @@ border-color: rgb(0, 0, 0);</string>
                 <string notr="true">background-color: rgb(171, 171, 171);\n</string>
                </property>
                <property name="text">
-                <string>Select</string>
+                <string>Show</string>
                </property>
               </widget>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="pid_label">
                <property name="text">
-                <string>PID:</string>
+                <string>Process ID:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Profiles:</string>
+                <string>Profile:</string>
                </property>
               </widget>
              </item>
