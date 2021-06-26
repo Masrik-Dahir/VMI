@@ -43,7 +43,6 @@ class MainWindow(QWidget, Ui_MainWindow):
         l = [i.replace(" ", "") for i in l[1].split(',')]
         [self.comboBox_2.addItem(i) for i in l]
 
-
         text += p + '\n'
         splitted = p.split('\n', 1)
         profiles = splitted[0].strip()
@@ -89,9 +88,18 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.scene.addText(self.text)
         self.obj = []
         x = 0
+        y = 0
+        next_y = 0
         for i in process_list:
-            p = process(x, i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7])
-            x = x + 200
+
+            if len(self.obj) % 8 == 0 and len(self.obj) != 1:
+                y = y + 320
+                x = 0
+                next_y = next_y + 320
+
+            p = process(x, y, next_y, i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7])
+            x = x + 320
+
             self.obj.append(p)
             processes_scene.addItem(p.get_rect_item())
             processes_scene.addItem(p.get_offset())
@@ -102,9 +110,7 @@ class MainWindow(QWidget, Ui_MainWindow):
             processes_scene.addItem(p.get_hnds())
             processes_scene.addItem(p.get_sess())
             processes_scene.addItem(p.get_wow64())
-            # self.processes_scene.addItem(p.get_start())
-            # self.processes_scene.addItem(p.get_exit())
-            # Just a test
+
             self.processes_scene = processes_scene
             dropdown_pid_list.append(p.get_pid_dropdown())
 
@@ -124,11 +130,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         if str(a) == 'Processes':
             print("Processes dropdown chosen")
             self.graphicsView.setScene(self.processes_scene)
-
-
             print("Done")
-
-
 
         if str(a) == 'Modify':
             print(a)

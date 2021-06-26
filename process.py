@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QGraphicsTextItem, QGraphicsRectItem
 
 
 class process(QGraphicsRectItem):
-    def __init__(self, x_location, offset, name, pid, ppid, thds, hnds, sess, wow64):
+    def __init__(self, x_location, y_location, next_y, offset, name, pid, ppid, thds, hnds, sess, wow64):
         super().__init__()
         self.x_location = x_location
         self.offset = offset
@@ -19,8 +19,6 @@ class process(QGraphicsRectItem):
         self.wow64 = wow64
         # self.start = start
         # self.exit = exit
-
-
 
         self.dic = {}
         self.dic['offset'] = self.offset
@@ -35,10 +33,7 @@ class process(QGraphicsRectItem):
         # self.dic['exit'] = self.exit
 
         #self.pid_text = QtWidgets.QGraphicsTextItem("test")
-        self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, 0, 200, 500))
-
-
-
+        self.rect_item = QtWidgets.QGraphicsRectItem(QtCore.QRectF(x_location, y_location, 270, 270))
 
         a1 = randint(0, 255)
         a2 = randint(0, 255)
@@ -57,28 +52,30 @@ class process(QGraphicsRectItem):
         # self.gui_start = QGraphicsTextItem()
         # self.gui_exit = QGraphicsTextItem()
 
-        self.gui_offset.setPos(self.x_location, 0)
+
+
+        self.gui_offset.setPos(self.x_location, next_y + 0)
         self.gui_offset.setPlainText("Offset: " + self.offset)
 
-        self.gui_name.setPos(self.x_location, 35)
+        self.gui_name.setPos(self.x_location, next_y + 35)
         self.gui_name.setPlainText("Name: " + self.name)
 
-        self.gui_pid.setPos(self.x_location, 70)
+        self.gui_pid.setPos(self.x_location, next_y + 70)
         self.gui_pid.setPlainText("PID: " + self.pid)
 
-        self.gui_ppid.setPos(self.x_location, 105)
+        self.gui_ppid.setPos(self.x_location, next_y + 105)
         self.gui_ppid.setPlainText("PPID: " + self.ppid)
 
-        self.gui_thds.setPos(self.x_location, 140)
+        self.gui_thds.setPos(self.x_location, next_y + 140)
         self.gui_thds.setPlainText("Threads: " + self.thds)
 
-        self.gui_hnds.setPos(self.x_location, 175)
+        self.gui_hnds.setPos(self.x_location, next_y + 175)
         self.gui_hnds.setPlainText("Handles: " + self.hnds)
 
-        self.gui_sess.setPos(self.x_location, 210)
+        self.gui_sess.setPos(self.x_location, next_y + 210)
         self.gui_sess.setPlainText("Session: " + self.sess)
 
-        self.gui_wow64.setPos(self.x_location, 245)
+        self.gui_wow64.setPos(self.x_location, next_y + 245)
         self.gui_wow64.setPlainText("wow64: " + self.wow64)
 
         # self.gui_start.setPos(self.x_location, 315)
