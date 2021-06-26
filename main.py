@@ -3,7 +3,7 @@ import os
 import re
 import sys, threading
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene
+from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication
 from form import Ui_MainWindow
 from process import process
 
@@ -152,6 +152,7 @@ class MainWindow(QWidget, Ui_MainWindow):
 
 
 app = QtWidgets.QApplication(sys.argv)
+QApplication.setStyle("Fusion")
 window = MainWindow()
 app.exec_()
 
