@@ -24,6 +24,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.pushButton_6.clicked.connect(self.start_thread)
         self.scene = QGraphicsScene(self)
         self.processes_scene = QGraphicsScene(self)
+        self.exit_pushButton.clicked.connect(self.quit)
         self.text = ""
         self.important = ""
         self.show()
@@ -152,6 +153,9 @@ class MainWindow(QWidget, Ui_MainWindow):
         location = 'python2.7 volatility/vol.py --profile='+combo_2+' -f ' + self.fname[0] + ' volshell'
         p = os.popen(location).read()
         command = "sc()"
+
+    def quit(self):
+        sys.exit()
 
 
 
