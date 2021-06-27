@@ -117,6 +117,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.pid_comboBox.addItems(dropdown_pid_list)
         self.scene = scene
 
+
+
     def dropdown_selection(self):
 
         print("Select Button clicked!")
