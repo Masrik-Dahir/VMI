@@ -1,12 +1,13 @@
 # This Python file uses the following encoding: utf-8
 import os
 import re
-import sys, threading
+import sys
+import threading
+import time
 from PyQt5 import uic, QtWidgets
-from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication
+from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication, QMessageBox
 from form import Ui_MainWindow
 from process import process
-import time
 
 
 def reverse(a):
@@ -30,9 +31,15 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.show()
 
     def browser_file(self):
+        MainWindow.setDisabled(self, True)
         print('Upload Button Clicked!')
         processes_scene = QGraphicsScene(self)
         self.fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
+
+        if self.fname[0] == "":
+            print("Enable screen.")
+            MainWindow.setDisabled(self, False)
+
         self.lineEdit.setText(self.fname[0])
         text = ""
         important = ""
@@ -113,14 +120,14 @@ class MainWindow(QWidget, Ui_MainWindow):
             self.processes_scene = processes_scene
             dropdown_pid_list.append(p.get_pid_dropdown())
 
-
         self.pid_comboBox.addItems(dropdown_pid_list)
+        MainWindow.setDisabled(self, False)
+
+        QMessageBox.about(self, "Upload", "Successfully uploaded.")
+
         self.scene = scene
 
-
-
     def dropdown_selection(self):
-
         print("Select Button clicked!")
         a = self.comboBox.currentText()
         if str(a) == 'Observe':
@@ -152,7 +159,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.pushButton_6.setDisabled(True)
         print("Profile Select Button clicked!")
         combo_2 = self.comboBox_2.currentText()
-        location = 'python2.7 volatility/vol.py --profile='+combo_2+' -f ' + self.fname[0] + ' volshell'
+        location = 'python2.7 volatility/vol.py --profile=' + combo_2 + ' -f ' + self.fname[0] + ' volshell'
         p = os.popen(location).read()
         command = "sc()"
 
@@ -160,9 +167,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         sys.exit()
 
 
-
 app = QtWidgets.QApplication(sys.argv)
 QApplication.setStyle("Fusion")
 window = MainWindow()
 app.exec_()
-
