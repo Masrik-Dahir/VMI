@@ -6,6 +6,7 @@ from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication
 from form import Ui_MainWindow
 from process import process
+import time
 
 
 def reverse(a):
@@ -33,6 +34,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
         self.lineEdit.setText(self.fname[0])
         text = ""
+        important = ""
+        scene = QGraphicsScene(self)
 
         print("Observe dropdown selected!")
         location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
@@ -46,21 +49,16 @@ class MainWindow(QWidget, Ui_MainWindow):
         text += p + '\n'
         splitted = p.split('\n', 1)
         profiles = splitted[0].strip()
-        # print(profiles)
         text += profiles + '\n'
         profiles = profiles.split(',')
-        # print(profiles)
         text += str(profiles) + '\n'
-        # index = profiles[0].find("Win")
-        # print(index)
         i = 0
-        important = ""
+
         while i < len(profiles):
             index = profiles[0].find("Win")
             suggested = profiles[0][index:]
             profiles[0] = suggested.strip()
             i += 1
-        # print(profiles)
         text += str(profiles) + '\n'
         first = profiles[0]
         pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
@@ -85,7 +83,7 @@ class MainWindow(QWidget, Ui_MainWindow):
                 process_list.append(asd)
         self.important = important
         self.text += self.important
-        self.scene.addText(self.text)
+        scene.addText(self.text)
         self.obj = []
         x = 0
         y = 0
@@ -114,9 +112,9 @@ class MainWindow(QWidget, Ui_MainWindow):
             self.processes_scene = processes_scene
             dropdown_pid_list.append(p.get_pid_dropdown())
 
-        # print([i.dic for i in self.obj]) # test
 
         self.pid_comboBox.addItems(dropdown_pid_list)
+        self.scene = scene
 
     def dropdown_selection(self):
 
@@ -142,6 +140,10 @@ class MainWindow(QWidget, Ui_MainWindow):
     def start_thread(self):
         thread1 = threading.Thread(target=self.profile_work)
         thread1.start()
+        time.sleep(7)
+        # p = os.popen("sc()").read()
+        # p = os.popen("mc()").read()
+        # p = os.popen("pc()").read()
 
     def profile_work(self):
         self.pushButton_6.setDisabled(True)
@@ -150,7 +152,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         location = 'python2.7 volatility/vol.py --profile='+combo_2+' -f ' + self.fname[0] + ' volshell'
         p = os.popen(location).read()
         command = "sc()"
-        p = os.popen(command).read()
+
 
 
 app = QtWidgets.QApplication(sys.argv)
