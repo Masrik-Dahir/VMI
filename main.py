@@ -1,28 +1,27 @@
 # This Python file uses the following encoding: utf-8
 import os
 import re
-import sys, threading
+import sys
+import threading
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication
 from form import Ui_MainWindow
 from process import process
 
 
-def reverse(a):
-    txt = a[::-1]
-    return txt
-
-
 class MainWindow(QWidget, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         uic.loadUi("form.ui", self)
+
         self.pushButton.clicked.connect(self.browser_file)
         self.pushButton_3.clicked.connect(self.dropdown_selection)
         self.pid_pushButton.clicked.connect(self.show_datastructure)
         self.pushButton_6.clicked.connect(self.start_thread)
         self.scene = QGraphicsScene(self)
         self.processes_scene = QGraphicsScene(self)
+        self.exit_pushButton.clicked.connect(self.doQuit)
+
         self.text = ""
         self.important = ""
         self.show()
@@ -33,27 +32,19 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.fname = QFileDialog.getOpenFileName(self, 'Open File', 'C:/', 'Dumps (*.mem *.vmem)')
         self.lineEdit.setText(self.fname[0])
         text = ""
-
         print("Observe dropdown selected!")
         location = 'python2.7 volatility/vol.py imageinfo -f ' + self.fname[0]
         p = os.popen(location).read()
-        # print(p)
         l = [i for i in p.split('\n')]
         l = [i for i in l[0].split(':')]
         l = [i.replace(" ", "") for i in l[1].split(',')]
         [self.comboBox_2.addItem(i) for i in l]
-
-
         text += p + '\n'
         splitted = p.split('\n', 1)
         profiles = splitted[0].strip()
-        # print(profiles)
         text += profiles + '\n'
         profiles = profiles.split(',')
-        # print(profiles)
         text += str(profiles) + '\n'
-        # index = profiles[0].find("Win")
-        # print(index)
         i = 0
         important = ""
         while i < len(profiles):
@@ -65,7 +56,6 @@ class MainWindow(QWidget, Ui_MainWindow):
         text += str(profiles) + '\n'
         first = profiles[0]
         pslist = 'python2.7 volatility/vol.py --profile=' + first + ' pslist -f ' + self.fname[0]
-
         p = os.popen(pslist).read()
         print(p)
         text += str(p) + '\n'
@@ -73,11 +63,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         important += str(p) + '\n'
         splitted = p.split('\n', 2)
         self.processes = splitted[2].split('\n')
-
-        x = 0
         process_list = []
         dropdown_pid_list = []
-
         for string in self.processes:
             important += str(string) + '\n'
             asd = re.sub(' +', ' ', string).split(' ')
@@ -102,13 +89,8 @@ class MainWindow(QWidget, Ui_MainWindow):
             processes_scene.addItem(p.get_hnds())
             processes_scene.addItem(p.get_sess())
             processes_scene.addItem(p.get_wow64())
-            # self.processes_scene.addItem(p.get_start())
-            # self.processes_scene.addItem(p.get_exit())
-            # Just a test
             self.processes_scene = processes_scene
             dropdown_pid_list.append(p.get_pid_dropdown())
-
-        # print([i.dic for i in self.obj]) # test
 
         self.pid_comboBox.addItems(dropdown_pid_list)
 
@@ -125,10 +107,7 @@ class MainWindow(QWidget, Ui_MainWindow):
             print("Processes dropdown chosen")
             self.graphicsView.setScene(self.processes_scene)
 
-
             print("Done")
-
-
 
         if str(a) == 'Modify':
             print(a)
@@ -149,6 +128,14 @@ class MainWindow(QWidget, Ui_MainWindow):
         p = os.popen(location).read()
         command = "sc()"
         p = os.popen(command).read()
+
+    def doQuit(self):
+        sys.exit()
+
+
+def reverse(a):
+    txt = a[::-1]
+    return txt
 
 
 app = QtWidgets.QApplication(sys.argv)
