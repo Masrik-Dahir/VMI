@@ -8,7 +8,7 @@ from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication, QMessageBox
-from PyQt5.uic.properties import QtGui
+from PyQt5.uic.properties import QtGui, QtCore
 
 from form import Ui_MainWindow
 from process import process
@@ -30,6 +30,8 @@ class MainWindow(QWidget, Ui_MainWindow):
         self.scene = QGraphicsScene(self)
         self.processes_scene = QGraphicsScene(self)
         self.exit_pushButton.clicked.connect(self.quit)
+
+
         self.text = ""
         self.important = ""
         self.show()
