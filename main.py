@@ -5,7 +5,11 @@ import sys
 import threading
 import time
 from PyQt5 import uic, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QFileDialog, QGraphicsScene, QApplication, QMessageBox
+from PyQt5.uic.properties import QtGui
+
 from form import Ui_MainWindow
 from process import process
 
@@ -108,8 +112,8 @@ class MainWindow(QWidget, Ui_MainWindow):
 
             self.obj.append(p)
             processes_scene.addItem(p.get_rect_item())
-            processes_scene.addItem(p.get_offset())
             processes_scene.addItem(p.get_name())
+            processes_scene.addItem(p.get_offset())
             processes_scene.addItem(p.get_pid())
             processes_scene.addItem(p.get_ppid())
             processes_scene.addItem(p.get_thds())
@@ -138,6 +142,7 @@ class MainWindow(QWidget, Ui_MainWindow):
         if str(a) == 'Processes':
             print("Processes dropdown chosen")
             self.graphicsView.setScene(self.processes_scene)
+            self.processes_scene.setBackgroundBrush(QColor('black'))
             print("Done")
 
         if str(a) == 'Modify':
