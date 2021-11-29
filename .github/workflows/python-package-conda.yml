@@ -16,6 +16,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64 
-      - run: sudo apt install libxkbcommon-x11-0
+      - run: sudo apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev
       - run: pip install PyQt5
       - run: python main.py
